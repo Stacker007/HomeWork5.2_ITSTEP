@@ -1,38 +1,41 @@
 /*
-1.	Элементы двумерного массива размерностью 3 на 4
-инициализировать случайными числами от 10 до 30.
-Вывести исходный массив. Затем обнулить вторую
-строку и вывести измененный массив.
-srand(time(0));
-int my=rand() % 500 +1;
+2.	Элементы массива размерностью  2 на 6 инициализировать 
+случайными числами от 0 до 5. Для каждой 
+строки распечатать индекс первого нулевого элемента (или слово “нет”).
 */
 
 #include <iostream>
 #include <ctime>
-#define ROW 4
-#define COLUMN 3
+#define ROW 2
+#define COLUMN 6
 using namespace std;
 void main() {
 	setlocale(LC_ALL, "rus");
 	srand(time(0));
-	int ourArr[COLUMN][ROW];
-	for (int i = 0; i < COLUMN; i++)
-		for (int j = 0; j < ROW; j++)
-			ourArr[i][j] = rand() % 20 + 10;
-	for (int i = 0; i < COLUMN; i++) {
-		for (int j = 0; j < ROW; j++)
-			cout << ourArr[i][j] << " ";
+	int ourArr[ROW][COLUMN];
+
+	for (int i = 0; i < ROW; i++)
+		for (int j = 0; j < COLUMN; j++)
+			ourArr[i][j] = rand() % 5;
+	for (int i = 0; i < ROW; i++) {
+		for (int j = 0; j < COLUMN; j++)
+			cout << ourArr[i][j]<< " ";
 		cout << endl;
 	}
+
 	cout << endl;
-	for (int j = 0; j < ROW; j++)
-		ourArr[1][j]=0;
 
-	for (int i = 0; i < COLUMN; i++) {
-		for (int j = 0; j < ROW; j++)
-			printf("%2d ", ourArr[i][j]) ;
+	for (int i = 0; i < ROW; i++) {
+		int columnIndex = -1;
+		for (int j = 0; j < COLUMN; j++)
+			if (ourArr[i][j] == 0) {
+				columnIndex = j;
+				break;
+			}
+		if (columnIndex == -1) cout << "нет";
+		else cout << columnIndex; 
 		cout << endl;
 	}
-
+	
 	system("pause");
 }
